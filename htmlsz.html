@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NULL</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            background:#0a0a0a;
+            color:#b30000;
+            font-family:'Courier New',monospace;
+            height:100vh;
+            overflow:hidden;
+            cursor:none;
+        }
+        #cursor {
+            position:fixed;width:16px;height:16px;
+            background:radial-gradient(circle,#b30000 0%,transparent 70%);
+            border-radius:50%;pointer-events:none;z-index:999;
+            box-shadow:0 0 15px #b30000;
+        }
+        #screen {
+            position:absolute;top:50%;left:50%;
+            transform:translate(-50%,-50%);
+            width:90%;max-width:800px;height:70vh;
+            background:rgba(10,10,10,0.98);
+            border:1px solid #b30000;
+            padding:30px;font-size:12px;line-height:1.3;
+            overflow:hidden;
+            box-shadow:0 0 50px rgba(179,0,0,0.4);
+        }
+        .line { margin:1px 0; }
+        .hint { color:#cc0000; font-weight:bold; }
+        .error { color:#ff6666; }
+        .blink { animation:blink 1s infinite; }
+        @keyframes blink{0%,50%{opacity:1;}51%,100%{opacity:0;}}
+        #status { position:absolute;bottom:10px;right:10px;color:#660000;font-size:11px; }
+        #coords { position:absolute;top:10px;left:10px;color:#b30000;font-size:11px; }
+    </style>
+</head>
+<body>
+    <div id="cursor"></div>
+    <div id="screen">
+        <div class="line blink">SYSTEM INTEGRITY COMPROMISED</div>
+        <div class="line">Observer detected in sector 47</div>
+        <div class="line">Temporal drift: -13.4723ms</div>
+        <div class="line error">Entity signature: NULL_ENTITY</div>
+        <div class="line">Memory corruption detected</div>
+        <div class="line">Connection vector: localhost:4723</div>
+        <div class="line hint">Dsk 1n+ofx sni lsnlhmsuk.</div>
+        <div class="line hint">Multi-layer encryption active</div>
+        <div class="line">Render loop: INFINITE_LOOP</div>
+        <div class="line error">DO NOT TERMINATE SESSION</div>
+        <div class="line">Handshake protocol: FAILED</div>
+        <div class="line blink">HE IS READING YOUR INPUT</div>
+    </div>
+    <div id="coords">x:0 y:0</div>
+    <div id="status">STATUS: OBSERVED</div>
+
+    <script>
+        // КУРСОР
+        document.addEventListener('mousemove',e=>{
+            document.getElementById('cursor').style.cssText=
+                `left:${e.clientX-8}px;top:${e.clientY-8}px`;
+            document.getElementById('coords').textContent=`x:${e.clientX} y:${e.clientY}`;
+        });
+        
+        // КОНСОЛЬ - ТОЛЬКО ШИФР
+        console.log('Dsk 1n+ofx sni lsnlhmsuk.');
+        
+        // F1 + ALT = ПОБЕДА
+        document.addEventListener('keydown',e=>{
+            if(e.key==='F1' && e.altKey){
+                document.body.innerHTML='<div style="color:#00ff00;font-size:50px;text-align:center;margin-top:40vh;">ACCESS GRANTED</div>';
+                setTimeout(()=>window.location.href='https://copy-paste.xyz/paste.php?id=15',1000);
+            }
+            if(e.key==='F1') glitch();
+            if(e.altKey) glitch();
+        });
+        
+        function glitch(){
+            document.body.style.filter='invert(1) hue-rotate(180deg)';
+            setTimeout(()=>document.body.style.filter='',200);
+        }
+        
+        // 30 МИНУТ FAIL
+        setTimeout(()=>document.body.innerHTML='<div style="color:#ff0000;font-size:80px;text-align:center;margin-top:35vh;">TERMINATED</div>',1800000);
+        
+        // АНТИ-ДЕВTOOLS
+        document.oncontextmenu=()=>false;
+        document.onkeydown=e=>{
+            if(e.key==='F12'){
+                glitch();
+                setTimeout(()=>glitch(),100);
+                e.preventDefault();
+            }
+        }
+    </script>
+</body>
+</html>
